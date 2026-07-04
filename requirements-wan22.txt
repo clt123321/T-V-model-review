@@ -1,0 +1,33 @@
+# Wan2.2-TI2V-5B inference environment (venv on local disk, e.g. /root/wan22-venv)
+# Python 3.11.x
+# ---- Torch stack (cu121 wheels) ----
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.4.1
+torchvision==0.19.1
+
+# ---- Wan2.2 pinned deps ----
+transformers>=4.49.0,<=4.51.3
+tokenizers>=0.20.3
+diffusers>=0.31.0
+accelerate>=1.1.1
+safetensors
+einops
+numpy>=1.23.5,<2
+opencv-python>=4.9.0.80
+Pillow
+tqdm
+imageio[ffmpeg]
+imageio-ffmpeg
+decord
+easydict
+ftfy
+dashscope
+huggingface_hub
+
+# flash_attn is required (wan/modules/model.py:145 calls flash_attention() directly, no SDPA fallback).
+# Do NOT `pip install flash-attn` (triggers 30-min compile). Instead:
+#   1) Check ABI:  python -c "import torch; print(torch._C._GLIBCXX_USE_CXX11_ABI)"
+#   2) Download the matching pre-built wheel from
+#      https://github.com/Dao-AILab/flash-attention/releases/tag/v2.7.4.post1
+#      (e.g. flash_attn-2.7.4.post1+cu12torch2.4cxx11abiFALSE-cp311-cp311-linux_x86_64.whl)
+#   3) pip install --no-deps <that wheel>

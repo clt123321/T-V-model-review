@@ -5,6 +5,7 @@
 # ---- Python / venv ----
 .venv
 .venv-bernini
+.venv-app
 __pycache__/
 *.pyc
 *.pyo

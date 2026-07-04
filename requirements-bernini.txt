@@ -1,0 +1,32 @@
+# Bernini-R-1.3B-Diffusers inference environment (venv on local disk, e.g. /root/bernini-venv)
+# Python 3.11.x
+# ---- Torch stack (cu121 index also serves 2.5.1 as +cu124 alias for some wheels) ----
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.5.1
+torchvision==0.20.1
+
+# ---- Bernini pinned deps ----
+diffusers==0.35.2
+transformers==4.57.3
+accelerate==0.34.2
+safetensors
+einops
+numpy<2
+Pillow
+tqdm
+ftfy
+ninja
+scipy
+decord
+imageio
+imageio-ffmpeg
+openai>=1.0
+huggingface_hub
+setuptools
+
+# flash_attn 2.8.3 — pre-built wheel required. Match torch 2.5 + cu12 + abiFALSE:
+#   https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.5cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+# Then: pip install --no-deps <that wheel>
+
+# VeOmni (required by all Bernini inference paths, install separately with --no-deps):
+#   pip install --no-deps git+https://github.com/ByteDance-Seed/VeOmni.git@v0.1.10
