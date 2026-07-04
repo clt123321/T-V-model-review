@@ -1,0 +1,158 @@
+{
+  "schema_version": "1",
+  "note": "Video generation prompts + run registry. Add one entry per run.",
+  "field_reference": {
+    "id": "unique short name for this run",
+    "created_at": "ISO datetime with timezone",
+    "model": "model name (Wan2.2-TI2V-5B, Bernini-R-1.3B-Diffusers, ...)",
+    "task": "t2v | i2v | ti2v | t2i | i2i | v2v | r2v | rv2v | mv2v",
+    "prompt": {
+      "text": "primary text prompt",
+      "negative_text": "negative prompt override (null = model default)",
+      "system_prompt": "prompt-enhancer system prompt (null = default)",
+      "image": "path to input image (i2v, i2i, ti2v) | null",
+      "images": ["path array for multi-reference r2v"],
+      "video": "path to input video (v2v, rv2v) | null",
+      "audio": "path to input audio (s2v) | null",
+      "reference_images": ["paths for identity/style refs (rv2v)"]
+    },
+    "params": {
+      "size": "WxH or WIDTH*HEIGHT",
+      "frame_num": "int, must be 4n+1 for Wan",
+      "fps": "int",
+      "sample_steps": "diffusion steps",
+      "sample_solver": "unipc | dpm | ...",
+      "guide_scale": "CFG scale",
+      "sample_shift": "flow-matching shift",
+      "base_seed": "int"
+    },
+    "output": {
+      "path": "absolute path to output file",
+      "size_bytes": "int",
+      "md5": "hex md5 of output"
+    },
+    "runtime": {
+      "gpu": "GPU model + memory",
+      "gpu_index": "CUDA_VISIBLE_DEVICES value",
+      "gen_seconds": "wall time for python generate process",
+      "peak_gpu_mib": "peak MiB observed via nvidia-smi sampler"
+    }
+  },
+  "runs": [
+    {
+      "id": "wan22-first",
+      "created_at": "2026-07-04T22:55:47+08:00",
+      "model": "Wan2.2-TI2V-5B",
+      "task": "t2v",
+      "prompt": {
+        "text": "A cinematic tracking shot of a small silver robot walking through a rainy neon alley at night, wet pavement reflections, soft volumetric light, realistic camera movement, detailed background, smooth motion, high quality, no text, no watermark.",
+        "negative_text": null,
+        "system_prompt": null,
+        "image": null,
+        "images": [],
+        "video": null,
+        "audio": null,
+        "reference_images": []
+      },
+      "params": {
+        "size": "1280*704",
+        "frame_num": 121,
+        "fps": 24,
+        "sample_steps": 50,
+        "sample_solver": "unipc",
+        "guide_scale": 5.0,
+        "sample_shift": 5.0,
+        "base_seed": 42
+      },
+      "output": {
+        "path": "/home/web_server/antispam/project/clt/video-generation/outputs/first_wan22_ti2v5b.mp4",
+        "size_bytes": 8054133,
+        "md5": "05c2e854023f29bc058b8b94dd925c6b"
+      },
+      "runtime": {
+        "gpu": "NVIDIA A800-SXM4-80GB",
+        "gpu_index": 1,
+        "gen_seconds": 427,
+        "peak_gpu_mib": 29799
+      }
+    },
+    {
+      "id": "bernini-r-t2v-first",
+      "created_at": "2026-07-04T23:57:12+08:00",
+      "model": "Bernini-R-1.3B-Diffusers",
+      "task": "t2v",
+      "prompt": {
+        "text": "A cinematic tracking shot of a small silver robot walking through a rainy neon alley at night, wet pavement reflections, soft volumetric light, realistic camera movement, detailed background, smooth motion, high quality, no text, no watermark.",
+        "negative_text": null,
+        "system_prompt": "auto (task_type=t2v: 'You are a helpful assistant specialized in text-to-video generation.')",
+        "image": null,
+        "images": [],
+        "video": null,
+        "audio": null,
+        "reference_images": []
+      },
+      "params": {
+        "size": "848x480",
+        "frame_num": 81,
+        "fps": 16,
+        "sample_steps": 40,
+        "sample_solver": "unipc",
+        "guidance_mode": "t2v_apg",
+        "flow_shift": 3.0,
+        "base_seed": null,
+        "case_file": "/home/web_server/antispam/project/clt/video-generation/configs/bernini_cases/t2v_first.json"
+      },
+      "output": {
+        "path": "/home/web_server/antispam/project/clt/video-generation/outputs/bernini_r_t2v_first.mp4",
+        "size_bytes": 6452285,
+        "md5": "098a5367f49f5be03b1ab137b37499a1"
+      },
+      "runtime": {
+        "gpu": "NVIDIA A800-SXM4-80GB",
+        "gpu_index": 1,
+        "gen_seconds": 152,
+        "peak_gpu_mib": 8087,
+        "notes": "Bernini t2v single-GPU inference (infer_single_gpu.py). 480p/16fps defaults, 40 diffusion steps."
+      }
+    },
+    {
+      "id": "guoge-certified-wan22-i2v",
+      "created_at": "2026-07-05T00:11:53+08:00",
+      "model": "Wan2.2-TI2V-5B",
+      "task": "i2v",
+      "video_title": "郭哥认证时刻 (Guoge Certified Moment)",
+      "prompt": {
+        "text": "The smiling young man in glasses laughs heartily and gives an emphatic, energetic thumbs-up straight at the camera, his eyes squinting with joy. His thumb wiggles playfully for emphasis, his shoulders bounce with laughter, and he cheerfully nods in approval. Warm indoor daylight, natural handheld selfie framing, cinematic playful vibe, smooth motion, high quality, no text, no watermark.",
+        "negative_text": null,
+        "system_prompt": null,
+        "image": "/home/web_server/antispam/project/clt/video-generation/guoge.jpg",
+        "images": [],
+        "video": null,
+        "audio": null,
+        "reference_images": []
+      },
+      "params": {
+        "size": "704*1280",
+        "frame_num": 121,
+        "fps": 24,
+        "sample_steps": 50,
+        "sample_solver": "unipc",
+        "guide_scale": 5.0,
+        "sample_shift": 5.0,
+        "base_seed": 42
+      },
+      "output": {
+        "path": "/home/web_server/antispam/project/clt/video-generation/outputs/guoge_certified_wan22_ti2v5b.mp4",
+        "size_bytes": 10870993,
+        "md5": "b26114b6b3267c9562e6dc00086881e4"
+      },
+      "runtime": {
+        "gpu": "NVIDIA A800-SXM4-80GB",
+        "gpu_index": 1,
+        "gen_seconds": 436,
+        "peak_gpu_mib": 29241,
+        "notes": "First image-to-video test. guoge.jpg (716x1264 portrait) used as first frame; TI2V-5B i2v branch. Prompt targets a playful animated thumbs-up + laughter loop."
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+# ============================================================================
+# .gitignore for video-generation project
+# ============================================================================
+
+# ---- Python / venv ----
+.venv
+.venv-bernini
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# ---- Model weights (60+ GB, HF LFS 有原件) ----
+Wan2.2-TI2V-5B/
+Bernini-R-1.3B-Diffusers/
+
+# ---- Third-party official repos (clone from upstream) ----
+# Wan2.2/  -- clone: git clone https://github.com/Wan-Video/Wan2.2.git
+# Bernini/ -- clone: git clone https://github.com/bytedance/Bernini.git
+Wan2.2/
+
+# ---- Private media (人像/隐私) ----
+guoge.jpg
+guoge_*.mp4
+outputs/guoge_*
+logs/guoge_*
+configs/bernini_cases/guoge_*
+
+# ---- Volatile runtime artifacts ----
+# GPU-memory sampling CSVs (regenerated on every run)
+logs/*_gpu_mem.csv
+
+# ---- Editor/OS ----
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# ---- Secrets ----
+.env
+*.token
+credentials.*
+
+# ---- Agent internals ----
+.codeflicker/
