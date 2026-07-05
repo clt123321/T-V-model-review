@@ -45,3 +45,7 @@ credentials.*
 
 # ---- Agent internals ----
 .codeflicker/
+
+# ---- Web UI generated content (per-run, may contain user-supplied prompts) ----
+outputs/webui_*.mp4
+logs/webui_*.log

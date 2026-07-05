@@ -11,10 +11,14 @@
       "negative_text": "negative prompt override (null = model default)",
       "system_prompt": "prompt-enhancer system prompt (null = default)",
       "image": "path to input image (i2v, i2i, ti2v) | null",
-      "images": ["path array for multi-reference r2v"],
+      "images": [
+        "path array for multi-reference r2v"
+      ],
       "video": "path to input video (v2v, rv2v) | null",
       "audio": "path to input audio (s2v) | null",
-      "reference_images": ["paths for identity/style refs (rv2v)"]
+      "reference_images": [
+        "paths for identity/style refs (rv2v)"
+      ]
     },
     "params": {
       "size": "WxH or WIDTH*HEIGHT",

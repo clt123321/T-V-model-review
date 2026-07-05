@@ -4,7 +4,7 @@
 
 - 📊 **对比报告**：[`docs/model_comparison_report.md`](docs/model_comparison_report.md)
 - 🎥 **样例产出**：`outputs/first_wan22_ti2v5b.mp4` (Wan2.2 720p) · `outputs/bernini_r_t2v_first.mp4` (Bernini 480p) — 同一 prompt "silver robot walking in rainy neon alley"
-- 🌐 **Web UI**：`python app.py` → `http://<host>:17024`
+- 🌐 **Web UI**：`python app.py` → `http://<host>:15856`
 - 🤖 **Agent Playbook**：[`docs/agent_constraints.md`](docs/agent_constraints.md) · [`docs/agent_actions_log.md`](docs/agent_actions_log.md)
 
 ---
@@ -95,7 +95,7 @@ uv venv --python 3.11 /root/app-venv
 /root/app-venv/bin/python app.py
 ```
 
-打开浏览器：`http://<your-host>:17024`
+打开浏览器：`http://<your-host>:15856`
 
 Web UI 包含 5 个 Tab：Video Gallery / Comparison Report / Prompt Registry / Reproduce / Agent Playbook。
 
@@ -133,7 +133,7 @@ CUDA_VISIBLE_DEVICES=1 TAG=demo \
 
 ```
 video-generation/
-├── app.py                      ← Gradio Web UI (port 17024)
+├── app.py                      ← Gradio Web UI (port 15856)
 ├── requirements-app.txt        ← 前端所需最小依赖
 ├── requirements-wan22.txt      ← Wan2.2 环境依赖清单
 ├── requirements-bernini.txt    ← Bernini 环境依赖清单
